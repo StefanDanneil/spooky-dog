@@ -21,11 +21,6 @@ export class UI {
     ctx.textAlign = "left";
     ctx.fillStyle = this.game.fontColor;
     ctx.fillText(`Score: ${this.game.score}`, 20, 50);
-
-    for (var i = 0; i < this.game.player.lives; i++) {
-      ctx.drawImage(this.livesImage, 20 * i + 20, 60, 25, 25);
-    }
-
     if (this.game.gameOver) {
       ctx.textAlign = "center";
       ctx.font = `${this.fontSize * 2}px ${this.fontFamily}`;
@@ -55,6 +50,20 @@ export class UI {
         );
       }
     }
+
     ctx.restore();
+
+    ctx.rect(20, 60, 110, 20);
+    ctx.fillStyle = "black";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.rect(25, 65, this.game.player.energy, 10);
+    ctx.fillStyle = "red";
+    ctx.fill();
+
+    for (var i = 0; i < this.game.player.lives; i++) {
+      ctx.drawImage(this.livesImage, 20 * i + 20, 85, 25, 25);
+    }
   }
 }

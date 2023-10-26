@@ -17,7 +17,10 @@ export class Falling extends State {
   handleInput(input: InputKey[]) {
     if (this.game.player.onGround()) {
       this.game.player.setState(PlayerState.Running);
-    } else if (input.includes(InputKey.ArrowDown))
+    } else if (
+      input.includes(InputKey.ArrowDown) &&
+      this.game.player.energy > 0
+    )
       this.game.player.setState(PlayerState.Diving);
   }
 }

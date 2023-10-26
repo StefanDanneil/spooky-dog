@@ -35,6 +35,9 @@ class Player {
   verticalSpeed = 0;
   weight = 1;
   lives = 5;
+  energy = 100;
+  energyTimer = 0;
+  energyInterval = 200;
 
   constructor(game: Game) {
     this.game = game;
@@ -55,6 +58,8 @@ class Player {
   update(input: InputKey[], deltaTime: number) {
     this.checkCollision();
     this.currentState.handleInput(input);
+
+    this.updateEnergy(deltaTime);
 
     // horizontal movement
     this.x += this.speed;
@@ -127,7 +132,8 @@ class Player {
         enemy.x < this.x + this.width &&
         enemy.x + enemy.width > this.x &&
         enemy.y < this.y + this.height &&
-        enemy.y + enemy.height > this.y
+        enemy.y + enemy.height > this.y &&
+        this.lives > 0
       ) {
         enemy.markedForDeletion = true;
         this.game.collisions.push(
@@ -154,6 +160,25 @@ class Player {
         }
       }
     });
+  }
+
+  updateEnergy(deltaTime: number) {
+    if (
+      [PlayerState.Rolling, PlayerState.Diving].includes(
+        this.currentState.state
+      ) &&
+      this.energy > 0
+    )
+      this.energy--;
+    else if (this.energy < 100) {
+      if (this.energyTimer >= this.energyInterval) {
+        this.energy++;
+        this.energyTimer = 0;
+      } else {
+        this.energyTimer += deltaTime;
+      }
+    }
+    console.log(this.energy);
   }
 }
 

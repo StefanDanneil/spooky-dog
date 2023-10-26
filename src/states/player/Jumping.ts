@@ -18,9 +18,9 @@ export class Jumping extends State {
   handleInput(input: InputKey[]) {
     if (this.game.player.verticalSpeed > this.game.player.weight)
       this.game.player.setState(PlayerState.Falling);
-    else if (input.includes(InputKey.Space))
+    else if (input.includes(InputKey.Space) && this.game.player.energy > 0)
       this.game.player.setState(PlayerState.Rolling);
-    else if (input.includes(InputKey.ArrowDown))
+    else if (input.includes(InputKey.ArrowDown) && this.game.player.energy > 0)
       this.game.player.setState(PlayerState.Diving);
   }
 }

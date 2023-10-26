@@ -29,7 +29,7 @@ export class Running extends State {
       this.game.player.setState(PlayerState.Sitting);
     else if (input.includes(InputKey.ArrowUp))
       this.game.player.setState(PlayerState.Jumping);
-    else if (input.includes(InputKey.Space))
+    else if (input.includes(InputKey.Space) && this.game.player.energy > 0)
       this.game.player.setState(PlayerState.Rolling);
   }
 }

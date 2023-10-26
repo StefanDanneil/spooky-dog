@@ -16,6 +16,12 @@ export class Rolling extends State {
   }
 
   handleInput(input: InputKey[]) {
+    if (this.game.player.energy <= 0) {
+      if (this.game.player.onGround())
+        this.game.player.setState(PlayerState.Running);
+      else this.game.player.setState(PlayerState.Falling);
+      return;
+    }
     this.game.particles.unshift(
       new Fire(
         this.game,
