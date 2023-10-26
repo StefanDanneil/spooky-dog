@@ -22,7 +22,6 @@ export class CollisionAnimation {
     this.game = game;
     this.x = x - this.width * 0.5;
     this.y = y - this.height * 0.5;
-    // this.sound = new Audio("/sounds/boom.wav");
   }
 
   draw(ctx: CanvasRenderingContext2D) {
