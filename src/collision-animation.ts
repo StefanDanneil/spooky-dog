@@ -16,11 +16,13 @@ export class CollisionAnimation {
   x: number;
   y: number;
   game: Game;
+  sound = new Audio("/sounds/boom.wav");
 
   constructor(game: Game, x: number, y: number) {
     this.game = game;
     this.x = x - this.width * 0.5;
     this.y = y - this.height * 0.5;
+    // this.sound = new Audio("/sounds/boom.wav");
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -38,6 +40,9 @@ export class CollisionAnimation {
   }
 
   update(deltaTime: number) {
+    if (this.frameX == 0) {
+      this.sound.play();
+    }
     this.x -= this.game.speed;
     if (this.frameTimer > this.frameInterval) {
       this.frameX++;

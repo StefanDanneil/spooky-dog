@@ -14,7 +14,6 @@ class InputHandler {
 
   constructor(game: Game) {
     window.addEventListener("keydown", (e) => {
-      console.log(e);
       if (!this.isKey(e.code)) return;
       const pressedKey: InputKey = e.code;
 

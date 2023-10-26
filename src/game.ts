@@ -1,6 +1,9 @@
 import { Background } from "./background";
 import { CollisionAnimation } from "./collision-animation";
-import { ClimbingEnemy, Enemy, FlyingEnemy, GroundEnemy } from "./enemies";
+import { ClimbingEnemy } from "./enemies/ClimbingEnemy";
+import { Enemy } from "./enemies/Enemy";
+import { FlyingEnemy } from "./enemies/FlyingEnemy";
+import { GroundEnemy } from "./enemies/GroundEnemy";
 import { FloatingMessage } from "./floating-message";
 import InputHandler from "./input-handler";
 import { Particle } from "./particle";
@@ -45,6 +48,7 @@ class Game {
     if (this.time >= this.maxTime) this.gameOver = true;
     this.player.update(this.input.keys, deltaTime);
     this.background.update();
+
     // handleEnemies
     if (this.enemyTimer > this.enemyInterval) {
       this.addEnemy();
