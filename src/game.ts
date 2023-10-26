@@ -29,9 +29,8 @@ class Game {
   floatingMessages: FloatingMessage[] = [];
   fontColor = "black";
   maxParticles = 50;
+  winningScore = 100;
   gameOver = false;
-  time = 0;
-  maxTime = 30000;
 
   constructor(width: number, height: number) {
     this.width = width;
@@ -44,8 +43,6 @@ class Game {
   }
 
   update(deltaTime: number) {
-    this.time += deltaTime;
-    if (this.time >= this.maxTime) this.gameOver = true;
     this.player.update(this.input.keys, deltaTime);
     this.background.update();
 

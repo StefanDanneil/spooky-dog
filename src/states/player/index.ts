@@ -1,4 +1,5 @@
 export * from "./Diving";
+export * from "./Dying";
 export * from "./Falling";
 export * from "./Hit";
 export * from "./Jumping";

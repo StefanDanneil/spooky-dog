@@ -22,11 +22,8 @@ export class UI {
     ctx.fillStyle = this.game.fontColor;
     ctx.fillText(`Score: ${this.game.score}`, 20, 50);
 
-    ctx.font = `${this.fontSize * 0.8}px ${this.fontFamily}`;
-    ctx.fillText(`Time: ${(this.game.time * 0.001).toFixed(1)}`, 20, 80);
-
     for (var i = 0; i < this.game.player.lives; i++) {
-      ctx.drawImage(this.livesImage, 20 * i + 20, 95, 25, 25);
+      ctx.drawImage(this.livesImage, 20 * i + 20, 60, 25, 25);
     }
 
     if (this.game.gameOver) {

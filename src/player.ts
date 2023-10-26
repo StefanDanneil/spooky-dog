@@ -4,6 +4,7 @@ import Game from "./game";
 import { InputKey } from "./input-handler";
 import {
   Diving,
+  Dying,
   Falling,
   Hit,
   Jumping,
@@ -18,30 +19,26 @@ class Player {
   game: Game;
   width = 100;
   height = 91.3;
-  x: number;
+  x = 0;
   y: number;
-  image: CanvasImageSource;
+  image = document.getElementById("player")! as CanvasImageSource;
+  fps = 20;
+  frameInterval = 1000 / this.fps;
+  states: State[] = [];
+  currentState: State;
   frameX = 0;
   frameY = 0;
   maxFrame = 0;
-  fps = 20;
-  frameInterval: number;
   frameTimer = 0;
   speed = 0;
   maxSpeed = 10;
   verticalSpeed = 0;
   weight = 1;
-  states: State[];
-  currentState: State;
   lives = 5;
 
   constructor(game: Game) {
     this.game = game;
-    this.x = 0;
     this.y = this.game.height - this.height - this.game.groundMargin;
-    this.image = document.getElementById("player")! as CanvasImageSource;
-
-    this.frameInterval = 1000 / this.fps;
     this.states = [
       new Sitting(this.game),
       new Running(this.game),
@@ -50,6 +47,7 @@ class Player {
       new Rolling(this.game),
       new Diving(this.game),
       new Hit(this.game),
+      new Dying(this.game),
     ];
     this.currentState = this.states[0];
   }
@@ -144,13 +142,15 @@ class Player {
           this.currentState == this.states[PlayerState.Diving]
         ) {
           this.game.score++;
+          if (this.game.score >= this.game.winningScore)
+            this.game.gameOver = true;
           this.game.floatingMessages.push(
             new FloatingMessage("+1", enemy.x, enemy.y, 100, 50)
           );
         } else {
           this.setState(PlayerState.Hit);
           this.lives--;
-          if (this.lives <= 0) this.game.gameOver = true;
+          if (this.lives <= 0) this.setState(PlayerState.Dying);
         }
       }
     });

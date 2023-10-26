@@ -9,6 +9,7 @@ export enum PlayerState {
   Rolling = 4,
   Diving = 5,
   Hit = 6,
+  Dying = 7,
 }
 
 export class State {
