@@ -178,7 +178,6 @@ class Player {
         this.energyTimer += deltaTime;
       }
     }
-    console.log(this.energy);
   }
 }
 

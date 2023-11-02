@@ -29,7 +29,7 @@ class Game {
   floatingMessages: FloatingMessage[] = [];
   fontColor = "black";
   maxParticles = 50;
-  winningScore = 100;
+  winningScore = 10;
   gameOver = false;
 
   constructor(width: number, height: number) {

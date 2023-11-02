@@ -24,7 +24,7 @@ export class UI {
     if (this.game.gameOver) {
       ctx.textAlign = "center";
       ctx.font = `${this.fontSize * 2}px ${this.fontFamily}`;
-      if (this.game.score >= 40) {
+      if (this.game.score >= this.game.winningScore) {
         ctx.fillText(
           "Boo-yah",
           this.game.width * 0.5,
